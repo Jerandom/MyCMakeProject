@@ -10,5 +10,6 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+MyCPlusPlusCmakeProject/.vs/
 MyCPlusPlusCmakeProject/bin/
-MyCPlusPlusCmakeProject/vs/
+MyCPlusPlusCmakeProject/out/
