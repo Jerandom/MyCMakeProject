@@ -1,0 +1,163 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/bin/Release/MyCMakeProject.exe"
+		},
+		{
+			"path" : "D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/bin/Release/MyCMakeProject.pdb"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries",
+			"target_include_directories",
+			"set_property"
+		],
+		"files" : 
+		[
+			"MyCPlusPlusCmakeProject/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 9,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 19,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 16,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 12,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG -std:c++20"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 3,
+					"path" : "D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/MyCPlusPlusCmakeProject/inc"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/MyCMakeLibrary/inc"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					4
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				2
+			]
+		}
+	],
+	"id" : "MyCMakeProject::@f511cb6b8c3134743e82",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/machine:x64 /INCREMENTAL:NO /subsystem:console",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "\"D:\\Projects\\Visual Studio Projects\\MyCPlusPlusCmakeProject\\MyCMakeLibrary\\lib\\CMakeLibrary.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "MyCMakeProject",
+	"nameOnDisk" : "MyCMakeProject.exe",
+	"paths" : 
+	{
+		"build" : "MyCPlusPlusCmakeProject",
+		"source" : "MyCPlusPlusCmakeProject"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				2
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "MyCPlusPlusCmakeProject/Main/MyCPlusPlusCmakeProject.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "MyCPlusPlusCmakeProject/inc/CMakeClass.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "MyCPlusPlusCmakeProject/src/CMakeClass.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}

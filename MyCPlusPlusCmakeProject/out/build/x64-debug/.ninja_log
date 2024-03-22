@@ -1,0 +1,36 @@
+# ninja log v5
+1397	1672	7327802871321660	D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/bin/Debug/MyCMakeProject.exe	f7d5e6bc68a6bb1e
+1	642	7291551533388102	MyCPlusPlusCmakeProject/CMakeFiles/MyCPlusPlusCmakeProject.dir/MyCPlusPlusCmakeProject.cpp.obj	d1a6405e59f7fb62
+1089	1397	7327802866124487	D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/bin/Debug/CMakeLibrary.dll	52a4f9c22d49c508
+5	1088	7327802866124487	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/CMakeLibrary.cpp.obj	772ab0e92351cca1
+26	1081	7327802866014354	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/SubjectClass.cpp.obj	ab30bc8c10eb75b5
+30	1117	7327802866370894	MyCPlusPlusCmakeProject/CMakeFiles/MyCMakeProject.dir/Main/MyCPlusPlusCmakeProject.cpp.obj	b7fb74770a662782
+645	996	7291551536778115	MyCPlusPlusCmakeProject/MyCPlusPlusCmakeProject.exe	8af37fbe033083ee
+39	1056	7327802383535253	MyCPlusPlusCmakeProject/CMakeFiles/MyCMakeProject.dir/src/CMakeClass.cpp.obj	5cc394a0f66c6337
+19	1057	7327802865794552	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/Singleton/SingletonClass.cpp.obj	319238773cd7f93a
+2	38	0	clean	5ca44c352ab543e6
+10	734	7327203505544627	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/QrCodeGenerator.cpp.obj	2c1be8f290e838dc
+11	886	7327802864095790	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/ObserverClass.cpp.obj	5a09a58af5cfa692
+18	710	7327189553619278	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/QRGenerator/QrCodeGenerator.cpp.obj	22333c3a4d91d710
+18	1005	7327203508208961	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/qrcodegen.cpp.obj	d1439a40c169ca07
+1	148	7327803380135981	build.ninja	ff5c91413f8b5eb5
+19	1450	7327802387498990	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/QRGenerator/qrcodegen.cpp.obj	e749776023616a83
+32	1554	7327802388514169	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/Thread/ThreadInterface.cpp.obj	c7d36e710fe63717
+14	982	7327802865073601	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/QRGenerator/QrCodeManager.cpp.obj	dbfbf7b270c016b2
+1089	1397	7327802866124487	D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/MyCMakeLibrary/lib/CMakeLibrary.lib	52a4f9c22d49c508
+2	43	0	clean	5ca44c352ab543e6
+12	979	7327803473526022	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/ObserverClass.cpp.obj	5a09a58af5cfa692
+50	1011	7327803473856179	MyCPlusPlusCmakeProject/CMakeFiles/MyCMakeProject.dir/src/CMakeClass.cpp.obj	5cc394a0f66c6337
+16	1098	7327803474724025	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/QRGenerator/QrCodeManager.cpp.obj	dbfbf7b270c016b2
+31	1224	7327803475938015	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/SubjectClass.cpp.obj	ab30bc8c10eb75b5
+44	1233	7327803476109388	MyCPlusPlusCmakeProject/CMakeFiles/MyCMakeProject.dir/Main/MyCPlusPlusCmakeProject.cpp.obj	b7fb74770a662782
+26	1244	7327803476179364	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/Singleton/SingletonClass.cpp.obj	319238773cd7f93a
+6	1245	7327803476189360	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/CMakeLibrary.cpp.obj	772ab0e92351cca1
+21	1436	7327803478115705	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/QRGenerator/qrcodegen.cpp.obj	e749776023616a83
+38	1437	7327803478106433	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/Thread/ThreadInterface.cpp.obj	c7d36e710fe63717
+1437	1758	7327803480562161	D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/bin/Debug/CMakeLibrary.dll	52a4f9c22d49c508
+1437	1758	7327803480562161	D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/MyCMakeLibrary/lib/CMakeLibrary.lib	52a4f9c22d49c508
+1758	2053	7327803483537919	D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/bin/Debug/MyCMakeProject.exe	f7d5e6bc68a6bb1e
+2	686	7327803779302168	MyCMakeLibrary/CMakeFiles/CMakeLibrary.dir/src/QRGenerator/QrCodeManager.cpp.obj	dbfbf7b270c016b2
+688	977	7327803779302168	D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/bin/Debug/CMakeLibrary.dll	52a4f9c22d49c508
+688	977	7327803779302168	D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/MyCMakeLibrary/lib/CMakeLibrary.lib	52a4f9c22d49c508
