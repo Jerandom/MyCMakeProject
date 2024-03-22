@@ -1,0 +1,2 @@
+# MyCMakeProject
+C++
