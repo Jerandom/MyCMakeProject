@@ -11,13 +11,13 @@
 class InterviewQ 
 {
 public:
-	int findMedian(vector<int> arr);
+	int findMedian(std::vector<int> arr);
 
-	int diagonalDifference(vector<vector<int>> arr);
+	int diagonalDifference(std::vector<std::vector<int>> arr);
 
 
 	bool isPalindrome(const std::string& str, int start, int end);
-	int palindromeIndex(string s);
+	int palindromeIndex(std::string s);
 };
 
 #if 0

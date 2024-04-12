@@ -5,10 +5,7 @@
 CMakeLibrary::CMakeLibrary() :
 	SingletonClass<CMakeLibrary>()
 {
-	std::cout << "Hello CMake Library" << std::endl;
-
 	SubjectClass::instance().attachSubjectObserver(&observerClass);
-
 	SubjectClass::instance().notifySubjectEvent((int)ObserverClass::EventType::UpdateMessage, sObserverClass);
 }
 

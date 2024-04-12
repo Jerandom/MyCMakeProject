@@ -1,6 +1,6 @@
 #include "InterviewQ.h"
 
-int InterviewQ::findMedian(vector<int> arr)
+int InterviewQ::findMedian(std::vector<int> arr)
 {
     std::sort(arr.begin(), arr.end());
 
@@ -16,7 +16,7 @@ int InterviewQ::findMedian(vector<int> arr)
     }
 }
 
-int InterviewQ::diagonalDifference(vector<vector<int>> arr)
+int InterviewQ::diagonalDifference(std::vector<std::vector<int>> arr)
 {
     int primaryDiagonalSum = 0;
     int secondaryDiagonalSum = 0;
@@ -56,7 +56,7 @@ bool InterviewQ::isPalindrome(const std::string& str, int start, int end)
     return true;
 }
 
-int InterviewQ::palindromeIndex(string s)
+int InterviewQ::palindromeIndex(std::string s)
 {
     int start = 0;
     int end = s.length() - 1;
