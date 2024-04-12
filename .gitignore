@@ -13,3 +13,5 @@ _deps
 MyCPlusPlusCmakeProject/.vs/
 MyCPlusPlusCmakeProject/bin/
 MyCPlusPlusCmakeProject/out/
+*.exp
+*.lib

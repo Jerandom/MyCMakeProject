@@ -9,7 +9,7 @@ CMakeLibrary::CMakeLibrary() :
 
 	SubjectClass::instance().attachSubjectObserver(&observerClass);
 
-	SubjectClass::instance().notifySubjectEvent(1, sObserverClass);
+	SubjectClass::instance().notifySubjectEvent((int)ObserverClass::EventType::UpdateMessage, sObserverClass);
 }
 
 CMakeLibrary::~CMakeLibrary()

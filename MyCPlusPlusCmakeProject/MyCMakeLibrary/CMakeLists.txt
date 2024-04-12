@@ -10,7 +10,7 @@ file(GLOB_RECURSE CMakeLibrarySources "inc/*.h" "src/*.cpp")
 list(APPEND CMakeLibrarySources "${CMAKE_CURRENT_SOURCE_DIR}/src/Singleton/SingletonClass.cpp")
 
 # Generate a definition based on Cmake File Path
-set(File_Path "${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/")
+set(File_Path "${CMAKE_SOURCE_DIR}/bin/output/")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/inc/MainAPI/CmakeInput.h.in ${CMAKE_CURRENT_SOURCE_DIR}/inc/MainAPI/CmakeInput.h @ONLY)
 
 # Add source to this project's library.
