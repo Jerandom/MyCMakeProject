@@ -83,3 +83,84 @@ int InterviewQ::palindromeIndex(std::string s)
     // String is already a palindrome or empty
     return -1;
 }
+
+std::string InterviewQ::timeConversion24Hr(std::string s)
+{
+    tm time_info = {};
+    stringstream ss(s);
+    ss >> get_time(&time_info, "%I:%M:%S %p");
+
+    // Check if the parsed hour is 12 (noon/midnight) and adjust accordingly
+    if (s.find("PM") != string::npos && time_info.tm_hour != 12)
+    {
+        time_info.tm_hour += 12; // Add 12 hours for PM times (except for 12 PM)
+    }
+    else if (s.find("AM") != string::npos && time_info.tm_hour == 12)
+    {
+        time_info.tm_hour = 0; // Midnight
+    }
+
+    ostringstream oss;
+    oss << put_time(&time_info, "%H:%M:%S");
+    string time_24h_str = oss.str();
+    return time_24h_str;
+}
+
+std::vector<int> InterviewQ::matchingStrings(std::vector<std::string> strings, std::vector<std::string> queries)
+{
+    unordered_map<string, int> freqMap;
+    for (const string& str : strings)
+    {
+        freqMap[str]++;
+    }
+
+    vector<int> result;
+    for (const string& query : queries)
+    {
+        result.push_back(freqMap[query]);
+    }
+
+    return result;
+}
+
+std::vector<int> InterviewQ::frequencyStrings(std::vector<std::string> strings)
+{
+    unordered_map<string, int> freqMap;
+    vector<int> result;
+
+    for (const string& str : strings)
+    {
+        freqMap[str]++;
+    }
+
+    for (const auto& pair : freqMap)
+    {
+        cout << pair.first << " : " << pair.second << endl;
+        result.push_back(pair.second);
+    }
+
+    return result;
+}
+
+std::vector<int> InterviewQ::countingSort(std::vector<int> num)
+{
+    map<int, int> arrMap;
+    vector<int> value;
+    for (auto& count : num)
+    {
+        arrMap[count]++;
+    }
+
+    for (int i = 0; i < 100; i++)
+    {
+        if (arrMap.find(i) != arrMap.end())
+        {
+            value.push_back(arrMap[i]);
+        }
+        else
+        {
+            value.push_back(0);
+        }
+    }
+    return value;
+}

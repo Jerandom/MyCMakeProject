@@ -6,7 +6,14 @@
 #include <vector>
 #include <cmath>
 #include <unordered_map>
+#include <map>
 #include <algorithm>
+#include <ctime>
+#include <iomanip>
+#include <chrono>
+#include <format>
+
+using namespace std;
 
 class InterviewQ 
 {
@@ -15,9 +22,17 @@ public:
 
 	int diagonalDifference(std::vector<std::vector<int>> arr);
 
-
 	bool isPalindrome(const std::string& str, int start, int end);
 	int palindromeIndex(std::string s);
+
+	std::string timeConversion24Hr(std::string s);
+
+	std::vector<int> matchingStrings(std::vector<std::string> strings, std::vector<std::string> queries);
+
+	std::vector<int> frequencyStrings(std::vector<std::string> strings);
+
+	std::vector<int> countingSort(std::vector<int> num);
+
 };
 
 #if 0
