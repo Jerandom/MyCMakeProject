@@ -33,6 +33,9 @@ public:
 
 	std::vector<int> countingSort(std::vector<int> num);
 
+	unordered_map<char, int> charFrequencyMap(const string& input);
+	bool canFormWord(const unordered_map<char, int>& inputCharMap, const unordered_map<char, int>& wordCharMap);
+	string findWord(vector<string> words, string input);
 };
 
 #if 0
