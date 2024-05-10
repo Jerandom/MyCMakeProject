@@ -6,31 +6,56 @@
 #include <unordered_map>
 #include <iostream>
 #include <regex>
+#include <algorithm>
+#include <cassert>
 
 using namespace std;
 
+string reverse_words(string str) 
+{
+    string result = "";
+    string matchWord = "";
+    int currentPos = 0;
+    int strPos = 0;
+    regex pattern("[a-zA-Z0-9]+");
+
+    sregex_iterator iterator(str.begin(), str.end(), pattern); 
+    sregex_iterator end; 
+
+    while (iterator != end)
+    {
+        smatch match = *iterator;
+
+        //append the non match part
+        strPos = match.position();
+        result.append(str, currentPos, strPos - currentPos);
+
+        //filter and reverse the words, then append to string
+        matchWord = match.str();
+        reverse(matchWord.begin(), matchWord.end());
+        result.append(matchWord);
+
+        currentPos = strPos + matchWord.length();
+
+        ++iterator;
+    }
+
+    if (currentPos < str.length()) 
+    {
+        result.append(str, currentPos, str.length() - currentPos);
+    }
+
+    return result;
+}
+
 int main() {
-    string text = "hello!~! world+-)";
+    string test_str = "hello32!~! world+-)";
+    assert(reverse_words(test_str) == "23olleh!~! dlrow+-)");
 
-    // Pattern to match alphabetic characters
-    regex pattern("[a-zA-Z]+");
+    test_str = "String; 2be reversed...";
+    assert(reverse_words(test_str) == "gnirtS; eb2 desrever...");
 
-    sregex_iterator it(text.begin(), text.end(), pattern); // Create an iterator over all matches
-    sregex_iterator end; // Default-constructed, represents end of iteration
-
-    vector<string> words; // To store extracted words
-    while (it != end) { // Loop over all matches
-        words.push_back(it->str()); // Extract the matched string
-        ++it; // Move to the next match
-    }
-
-    // Output all extracted alphabetic sequences
-    cout << "Extracted words/letters: ";
-    for (const auto& word : words) {
-        cout << word << " ";
-    }
-
-    cout << endl;
-
+    test_str = "@@(#*()#@*..@(#*@(";
+    assert(reverse_words(test_str) == "@@(#*()#@*..@(#*@(");
     return 0;
 }

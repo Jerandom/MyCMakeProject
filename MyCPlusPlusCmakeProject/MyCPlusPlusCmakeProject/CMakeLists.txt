@@ -10,6 +10,9 @@ project(${PROJECT_NAME} VERSION 1.0.0
 	LANGUAGES CXX
     DESCRIPTION "A simple C++ project")
 
+# Enable CTest
+enable_testing()
+
 # Define the library path
 set(LIB_PATH ${CMAKE_SOURCE_DIR}/MyCMakeLibrary/lib/${CMAKE_BUILD_TYPE}/)
 
@@ -42,7 +45,18 @@ file(GLOB_RECURSE CMakeProjectSources
 # Add source to this project's executable.
 add_executable (${PROJECT_NAME} ${CMakeProjectSources})
 
+# Link libraries
 target_link_libraries(${PROJECT_NAME} ${MY_LIBRARIES})
+
+# Add tests
+file(GLOB_RECURSE TestSources 
+    "MyCPlusPlusCmakeProject.cpp")
+
+# Create a test executable
+add_executable(MyTests ${TestSources})
+
+# Register tests with CTest
+add_test(NAME TestSuite COMMAND MyTests)
 
 # Install compiled targets
 install(TARGETS ${PROJECT_NAME}
@@ -54,9 +68,6 @@ install(FILES ${MY_DLLs}
     DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/)
 
 install(DIRECTORY inc DESTINATION .)
-
-# Enable CTest
-enable_testing()
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
