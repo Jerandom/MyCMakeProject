@@ -4,58 +4,33 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <iostream>
+#include <regex>
 
 using namespace std;
 
-// Function to create a character frequency map from a given string
-unordered_map<char, int> charFrequencyMap(const string& input) 
-{
-    unordered_map<char, int> charCount;
-    for (const char& c : input) {
-        charCount[c]++;
+int main() {
+    string text = "hello!~! world+-)";
+
+    // Pattern to match alphabetic characters
+    regex pattern("[a-zA-Z]+");
+
+    sregex_iterator it(text.begin(), text.end(), pattern); // Create an iterator over all matches
+    sregex_iterator end; // Default-constructed, represents end of iteration
+
+    vector<string> words; // To store extracted words
+    while (it != end) { // Loop over all matches
+        words.push_back(it->str()); // Extract the matched string
+        ++it; // Move to the next match
     }
-    return charCount;
-}
 
-// Function to check if the character frequency of 'word' can be satisfied by 'inputCharMap'
-bool canFormWord(const unordered_map<char, int>& inputCharMap, const unordered_map<char, int>& wordCharMap) {
-    for (const auto& pair : wordCharMap) 
-    {
-        char c = pair.first;
-        int wordCount = pair.second;
-
-        // Check if 'c' exists in 'inputCharMap' with at least 'wordCount' times
-        if (inputCharMap.find(c) == inputCharMap.end() || inputCharMap.at(c) < wordCount) 
-        {
-            return false;
-        }
+    // Output all extracted alphabetic sequences
+    cout << "Extracted words/letters: ";
+    for (const auto& word : words) {
+        cout << word << " ";
     }
-    return true;
-}
 
-string findWord(vector<string> words, string input) 
-{
-    unordered_map<char, int> inputCharMap = charFrequencyMap(input);
+    cout << endl;
 
-    for (const auto word : words) 
-    {
-        unordered_map<char, int> wordCharMap = charFrequencyMap(word);
-
-        // If 'inputCharMap' can form 'word', return the word
-        if (canFormWord(inputCharMap, wordCharMap)) 
-        {
-            return word;
-        }
-    }
-    return ""; // No matching word found
-}
-
-int main() 
-{
-    string input = "hasdhuoy";
-
-    vector<string> words = { "hello", "world" , "how", "are", "you" };
-
-	findWord(words, input);
     return 0;
 }
