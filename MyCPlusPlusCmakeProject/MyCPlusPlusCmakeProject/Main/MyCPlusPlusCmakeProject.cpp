@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <cassert>
 
+#include "QRGenerator/QrCodeManager.h"
+
 using namespace std;
 
 string reverse_words(string str) 
@@ -48,14 +50,9 @@ string reverse_words(string str)
     return result;
 }
 
-int main() {
-    string test_str = "hello32!~! world+-)";
-    assert(reverse_words(test_str) == "23olleh!~! dlrow+-)");
+int main() 
+{
 
-    test_str = "String; 2be reversed...";
-    assert(reverse_words(test_str) == "gnirtS; eb2 desrever...");
-
-    test_str = "@@(#*()#@*..@(#*@(";
-    assert(reverse_words(test_str) == "@@(#*()#@*..@(#*@(");
+    QrCodeManager::instance().generateHighResQRCode("Hello World", 1, 1);
     return 0;
 }

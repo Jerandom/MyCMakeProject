@@ -28,7 +28,9 @@ set(MY_DLLs
 add_definitions(-DDLL_EXPORT)
 
 # include directories
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/inc/)
+include_directories(
+    ${CMAKE_SOURCE_DIR}/MyCMakeLibrary/inc
+    ${CMAKE_CURRENT_SOURCE_DIR}/inc/)
 
 # Add source to this project's executable using a wildcard
 file(GLOB_RECURSE CMakeProjectSources 

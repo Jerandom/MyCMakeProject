@@ -35,6 +35,7 @@
 #include <fstream>
 #include "QRGenerator/qrcodegen.hpp"
 #include "QRGenerator/QrCodeManager.h"
+#include "QRGenerator/lodepng.h"
 
 using std::uint8_t;
 using qrcodegen::QrCode;
@@ -52,7 +53,7 @@ QrCodeManager::~QrCodeManager()
 void QrCodeManager::generateQRImage(std::string content, int scale)
 {
 	// Encode the content into a QR Code symbol
-	qrcodegen::QrCode qr = qrcodegen::QrCode::encodeText(content.c_str(), qrcodegen::QrCode::Ecc::LOW);
+	qrcodegen::QrCode qr = qrcodegen::QrCode::encodeText(content.c_str(), qrcodegen::QrCode::Ecc::MEDIUM);
 
 	// Output the QR Code as a PBM (Portable Bitmap) file
 	std::ofstream outFile(FILE_PATH + std::string("QrCode.bmp"), std::ios::binary);
@@ -142,4 +143,43 @@ void QrCodeManager::generateQRImage(std::string content, int scale)
 	// Close the file
 	outFile.close();
 }
+
+void QrCodeManager::generateHighResQRCode(const std::string& text, int scale, int border)
+{
+	// Generate the QR code
+	qrcodegen::QrCode qr = qrcodegen::QrCode::encodeText(text.c_str(), qrcodegen::QrCode::Ecc::LOW);
+
+	// Calculate the size of the QR code image
+	int qrSize = qr.getSize();
+	int imageSize = (qrSize + 2 * border) * scale;
+
+	// Create a vector to store the image data
+	std::vector<unsigned char> image(imageSize * imageSize * 4, 255); // Initialize with white background
+
+	// Fill the image with the QR code data
+	for (int y = 0; y < qrSize; ++y) 
+	{
+		for (int x = 0; x < qrSize; ++x) 
+		{
+			bool module = qr.getModule(x, y);
+			int xPos = (x + border) * scale;
+			int yPos = (y + border) * scale;
+			for (int dy = 0; dy < scale; ++dy) 
+			{
+				for (int dx = 0; dx < scale; ++dx) 
+				{
+					int index = 4 * ((yPos + dy) * imageSize + (xPos + dx));
+					image[index + 0] = module ? 0 : 255; // Red
+					image[index + 1] = module ? 0 : 255; // Green
+					image[index + 2] = module ? 0 : 255; // Blue
+					image[index + 3] = 255;              // Alpha
+				}
+			}
+		}
+	}
+
+	// Save the image as a PNG file using lodepng
+	lodepng::encode(FILE_PATH + std::string("QrCode.png"), image, imageSize, imageSize);
+}
+
 

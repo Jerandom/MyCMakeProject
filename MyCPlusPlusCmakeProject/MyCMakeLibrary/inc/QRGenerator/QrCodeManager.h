@@ -16,6 +16,8 @@ protected:
 public:
     void generateQRImage(std::string content, int scale);
 
+    void generateHighResQRCode(const std::string& text, int scale, int border);
+
 private:
 
 };
