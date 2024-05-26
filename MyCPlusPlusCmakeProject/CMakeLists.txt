@@ -14,3 +14,6 @@ project ("MyCPlusPlusCmakeProject")
 # Include sub-projects.
 add_subdirectory ("MyCMakeLibrary")
 add_subdirectory ("MyCPlusPlusCmakeProject")
+
+# Enable testing
+enable_testing()

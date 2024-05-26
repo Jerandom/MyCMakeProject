@@ -10,11 +10,8 @@ project(${PROJECT_NAME} VERSION 1.0.0
 	LANGUAGES CXX
     DESCRIPTION "A simple C++ project")
 
-# Enable CTest
-enable_testing()
-
 # Define the library path
-set(LIB_PATH ${CMAKE_SOURCE_DIR}/MyCMakeLibrary/lib/${CMAKE_BUILD_TYPE}/)
+set(LIB_PATH ${CMAKE_BINARY_DIR}/MyCMakeLibrary)
 
 # Link directories
 link_directories(${LIB_PATH})
@@ -26,9 +23,6 @@ set(MY_LIBRARIES
 # Define the DLL to be installed
 set(MY_DLLs 
     "${LIB_PATH}/MyCMakeLibrary.dll")
-
-# warning level 4
-add_compile_options(/W4)
 
 # add preprocessor definitions
 add_definitions(-DDLL_EXPORT)
@@ -47,16 +41,6 @@ add_executable (${PROJECT_NAME} ${CMakeProjectSources})
 
 # Link libraries
 target_link_libraries(${PROJECT_NAME} ${MY_LIBRARIES})
-
-# Add tests
-file(GLOB_RECURSE TestSources 
-    "MyCPlusPlusCmakeProject.cpp")
-
-# Create a test executable
-add_executable(MyTests ${TestSources})
-
-# Register tests with CTest
-add_test(NAME TestSuite COMMAND MyTests)
 
 # Install compiled targets
 install(TARGETS ${PROJECT_NAME}

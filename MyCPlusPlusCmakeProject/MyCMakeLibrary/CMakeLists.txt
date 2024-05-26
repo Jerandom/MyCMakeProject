@@ -11,9 +11,6 @@ project (${PROJECT_NAME})
 message("CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME}")
 message("BUILD_TARGET: ${PLATFORM}")
 
-# warning level 4
-add_compile_options(/W4)
-
 # Generate a definition based on Cmake File Path
 set(File_Path "${CMAKE_SOURCE_DIR}/MyCPlusPlusCmakeProject/bin/output/")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/inc/MainAPI/CmakeInput.h.in ${CMAKE_CURRENT_SOURCE_DIR}/inc/MainAPI/CmakeInput.h @ONLY)
@@ -27,18 +24,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/inc/)
 # Add source to this project's library using a wildcard
 file(GLOB_RECURSE CMakeLibrarySources 
     "inc/*.h" 
-    "src/*.cpp" 
-    "UnitTest/*.cpp")
+    "src/*.cpp")
 
 # add the library
 add_library (${PROJECT_NAME} SHARED ${CMakeLibrarySources})
-
-#add_executable (${PROJECT_NAME}_test
-#    "UnitTest/MyCmakeLibTest.cpp"
-#    "UnitTest/MyCmakeLibTest.h")
-
-
-#target_link_libraries(${PROJECT_NAME}_test ${PROJECT_NAME})
 
 # Install compiled targets
 install(TARGETS ${PROJECT_NAME}

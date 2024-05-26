@@ -1,15 +1,10 @@
-/*
- * Singleton.h
- *
- *  Created on: Aug 29, 2019
- *      Author: irvin
- */
-
 #ifndef SINGLETONCLASS_H_
 #define SINGLETONCLASS_H_
 
+#include "MainAPI/MainAPI.h"
+
 template <typename T>
-class SingletonClass
+class MAINDLL_API SingletonClass
 {
 public:
     static T& instance();
