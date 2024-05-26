@@ -1,1 +1,1 @@
-#define FILE_PATH "D:/Projects/Visual Studio Projects/MyCPlusPlusCmakeProject/bin/Debug/"
+#define OUTPUT_PATH "C:/Users/skyru/OneDrive/Documents/Github/MyCMakeProject/MyCPlusPlusCmakeProject/MyCPlusPlusCmakeProject/bin/output/"

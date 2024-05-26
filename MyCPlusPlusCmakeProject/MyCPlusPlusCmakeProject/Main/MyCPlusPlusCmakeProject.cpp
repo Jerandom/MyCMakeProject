@@ -53,6 +53,8 @@ string reverse_words(string str)
 int main() 
 {
 
-    QrCodeManager::instance().generateHighResQRCode("Hello World", 1, 1);
+    QrCodeManager::instance().generateHighResQRCode("Hello World", 10, 1);
+    cout<<"Hello World!";
+
     return 0;
 }

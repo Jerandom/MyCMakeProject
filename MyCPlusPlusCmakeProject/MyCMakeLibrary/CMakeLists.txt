@@ -12,8 +12,13 @@ message("CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME}")
 message("BUILD_TARGET: ${PLATFORM}")
 
 # Generate a definition based on Cmake File Path
-set(File_Path "${CMAKE_SOURCE_DIR}/MyCPlusPlusCmakeProject/bin/output/")
+set(OUTPUT_PATH "${CMAKE_SOURCE_DIR}/MyCPlusPlusCmakeProject/bin/output/")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/inc/MainAPI/CmakeInput.h.in ${CMAKE_CURRENT_SOURCE_DIR}/inc/MainAPI/CmakeInput.h @ONLY)
+
+# Check if the directory exists
+if(NOT EXISTS ${OUTPUT_PATH})
+file(MAKE_DIRECTORY ${OUTPUT_PATH})
+endif()
 
 # add preprocessor definitions
 add_definitions(-DDLL_EXPORT)
@@ -32,8 +37,8 @@ add_library (${PROJECT_NAME} SHARED ${CMakeLibrarySources})
 # Install compiled targets
 install(TARGETS ${PROJECT_NAME}
     RUNTIME DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE}/
-    ARCHIVE DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE}/)
-
+    ARCHIVE DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE}/
+    LIBRARY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE}/)
 
 install(DIRECTORY inc DESTINATION .)
 
