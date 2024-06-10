@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <map>
 #include <algorithm>
+#include <regex>
 #include <ctime>
 #include <iomanip>
 #include <chrono>
@@ -24,6 +25,10 @@ public:
 
 	bool isPalindrome(const std::string& str, int start, int end);
 	int palindromeIndex(std::string s);
+
+	int TruckQuestion(std::vector<int> numberOfBoxes, std::vector<int> unitsPerBox, int truckSize);
+
+	std::string reverse_words(std::string str);
 
 	std::string timeConversion24Hr(std::string s);
 

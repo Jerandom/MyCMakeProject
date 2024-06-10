@@ -84,6 +84,80 @@ int InterviewQ::palindromeIndex(std::string s)
     return -1;
 }
 
+int InterviewQ::TruckQuestion(std::vector<int> numberOfBoxes, std::vector<int> unitsPerBox, int truckSize)
+{
+    int highestUnits = 0;
+    int index = 0;
+    int sizeOfTruck = 0;
+
+    int total = 0;
+
+    for (int i = 0; i < numberOfBoxes.size(); i++)
+    {
+        if (highestUnits <= unitsPerBox[i])
+        {
+            highestUnits = unitsPerBox[i];
+            index = numberOfBoxes[i];
+            sizeOfTruck++;
+            total += highestUnits;
+            index--;
+
+            while (index >= 1 && sizeOfTruck < truckSize)
+            {
+                sizeOfTruck++;
+                index--;
+                total += highestUnits;
+            }
+
+            highestUnits--;
+        }
+
+        if (sizeOfTruck == truckSize)
+        {
+            break;
+        }
+    }
+
+    return total;
+}
+
+std::string InterviewQ::reverse_words(string str)
+{
+    string result = "";
+    string matchWord = "";
+    int currentPos = 0;
+    int strPos = 0;
+    regex pattern("[a-zA-Z0-9]+");
+
+    sregex_iterator iterator(str.begin(), str.end(), pattern);
+    sregex_iterator end;
+
+    while (iterator != end)
+    {
+        smatch match = *iterator;
+
+        //append the non match part
+        strPos = match.position();
+        result.append(str, currentPos, strPos - currentPos);
+
+        //filter and reverse the words, then append to string
+        matchWord = match.str();
+        reverse(matchWord.begin(), matchWord.end());
+        result.append(matchWord);
+
+        currentPos = strPos + matchWord.length();
+
+        ++iterator;
+    }
+
+    if (currentPos < str.length())
+    {
+        result.append(str, currentPos, str.length() - currentPos);
+    }
+
+    return result;
+}
+
 std::string InterviewQ::timeConversion24Hr(std::string s)
 {
     tm time_info = {};
