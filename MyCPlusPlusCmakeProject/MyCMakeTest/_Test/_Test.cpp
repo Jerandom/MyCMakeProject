@@ -1,13 +1,17 @@
 ﻿// _Test.cpp : Defines the entry point for the application.
 //
 
+#include "QRGenerator/QrCodeManager.h"
+
 #include <gtest/gtest.h>
-#include "InterviewQ.h"
+#include <vector>
 
 using namespace std;
 
-TEST(TestCaseName, TestName) {
-    EXPECT_EQ(1, 1);
+TEST(TestCaseName, TestName) 
+{
+    vector<int> vec = { 1,2,3,4,5 };
+    EXPECT_EQ(3, 3);
     EXPECT_TRUE(true);
 }
 

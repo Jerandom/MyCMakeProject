@@ -53,8 +53,7 @@ add_definitions(-DDLL_EXPORT)
 
 # Include directories
 include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/../MyCMakeLibrary/inc
-    ${CMAKE_CURRENT_SOURCE_DIR}/../MyCPlusPlusCmakeProject/inc)
+    ${CMAKE_CURRENT_SOURCE_DIR}/../MyCMakeLibrary/inc)
 
 ###################################################### TEST SETUP START ######################################################
 # Add seperate _test source
@@ -64,7 +63,7 @@ file(GLOB_RECURSE CMakeTestSources
 # Add a test executable
 add_executable(${PROJECT_NAME} ${CMakeTestSources})
 
-# Link the test executable with GoogleTest and your main executable
+# Link the test executable with GoogleTest
 target_link_libraries(${PROJECT_NAME} ${MY_LIBRARIES})
 
 # Add tests to CTest
@@ -79,8 +78,7 @@ install(TARGETS gtest gtest_main
     LIBRARY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE}/)
 
 # Install GoogleTest headers
-install(DIRECTORY ${googletest_SOURCE_DIR}/googletest/include/gtest
-    DESTINATION .)
+install(DIRECTORY ${googletest_SOURCE_DIR}/googletest/include/gtest DESTINATION .)
 
 # Install Project Targets
 install(TARGETS ${PROJECT_NAME}
@@ -91,6 +89,10 @@ install(TARGETS ${PROJECT_NAME}
 # Install specific DLL files to the same directory
 install(FILES ${MY_DLLs}
     DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/)
+
+# Register tests with CTest
+include(GoogleTest)
+gtest_discover_tests(${PROJECT_NAME})
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
