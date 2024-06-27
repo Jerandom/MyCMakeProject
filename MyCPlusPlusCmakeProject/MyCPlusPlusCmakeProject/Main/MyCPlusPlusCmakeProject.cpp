@@ -13,10 +13,10 @@
 
 using namespace std;
 
-
 int main()
 {
     QrCodeManager::instance().generateHighResQRCode("asdas", 1, 1);
+    cout << "hello world" << endl;
  
     return 0;
 }
