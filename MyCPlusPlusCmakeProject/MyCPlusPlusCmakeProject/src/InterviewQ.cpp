@@ -239,6 +239,53 @@ std::vector<int> InterviewQ::countingSort(std::vector<int> num)
     return value;
 }
 
+std::vector<int> InterviewQ::climbingLeaderboard(std::vector<int> ranked, std::vector<int> player)
+{
+    vector<int> newLeaderboard = {};
+    int counter = 0;
+    int score = INT_MAX;
+
+    map<int, int> rankMap;
+
+    //find current ranking
+    for (int i = 0; i < ranked.size(); i++)
+    {
+        if (score > ranked[i])
+        {
+            score = ranked[i];
+            counter++;
+        }
+
+        rankMap[ranked[i]] = counter;
+    }
+
+    // Output the contents of the original map
+    for (const auto& pair : rankMap) {
+        std::cout << "Index: " << pair.first << ", Value: " << pair.second << std::endl;
+    }
+    std::cout << std::endl;
+
+    for (int i = 0; i < player.size(); i++)
+    {
+        counter = 1;
+        for (auto& pair : rankMap)
+        {
+            if (player[i] < pair.first)
+            {
+                counter++;
+            }
+        }
+
+        newLeaderboard.push_back(counter);
+    }
+
+    for (const auto& pair : newLeaderboard) {
+        std::cout << pair << endl;
+    }
+
+    return newLeaderboard;
+}
+
 unordered_map<char, int> InterviewQ::charFrequencyMap(const string& input)
 {
     unordered_map<char, int> charCount;

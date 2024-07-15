@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <map>
 #include <iostream>
 #include <regex>
 #include <algorithm>
@@ -16,7 +17,6 @@ using namespace std;
 int main()
 {
     QrCodeManager::instance().generateHighResQRCode("asdas", 1, 1);
-    cout << "hello world" << endl;
  
     return 0;
 }
