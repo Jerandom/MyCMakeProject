@@ -5,26 +5,23 @@
 #include <memory>
 #include <string>
 
-namespace PSMMain
+class ThreadInterface
 {
-    class ThreadInterface
-    {
-    public:
-        ThreadInterface();
-        virtual ~ThreadInterface();
+public:
+    ThreadInterface();
+    virtual ~ThreadInterface();
 
-        virtual void shutdown();
-        bool isShutdown() const;
-        bool init(const char* pThreadName);
-        bool init(const char* pThreadName, void* param);
-        virtual void run(void);
-        virtual void run(void* param);
+    virtual void shutdown();
+    bool isShutdown() const;
+    bool init(const char* pThreadName);
+    bool init(const char* pThreadName, void* param);
+    virtual void run(void);
+    virtual void run(void* param);
 
-    private:
-        std::thread* sthread;
-        bool isAlive;
-        std::string threadName;
-    };
-}
+private:
+    std::thread* sthread;
+    bool isAlive;
+    std::string threadName;
+};
 
 #endif

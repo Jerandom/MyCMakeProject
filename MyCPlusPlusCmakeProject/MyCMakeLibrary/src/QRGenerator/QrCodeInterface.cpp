@@ -34,23 +34,23 @@
 #include <vector>
 #include <fstream>
 #include "QRGenerator/qrcodegen.hpp"
-#include "QRGenerator/QrCodeManager.h"
+#include "QRGenerator/QrCodeInterface.h"
 #include "QRGenerator/lodepng.h"
 
 using std::uint8_t;
 using qrcodegen::QrCode;
 using qrcodegen::QrSegment;
 
-QrCodeManager::QrCodeManager() :
-	SingletonClass<QrCodeManager>()
+QrCodeInterface::QrCodeInterface() :
+	SingletonClass<QrCodeInterface>()
 {
 }
 
-QrCodeManager::~QrCodeManager()
+QrCodeInterface::~QrCodeInterface()
 {
 }
 
-void QrCodeManager::generateQRImage(std::string content, int scale)
+void QrCodeInterface::generateQRImage(std::string content, int scale)
 {
 	// Encode the content into a QR Code symbol
 	qrcodegen::QrCode qr = qrcodegen::QrCode::encodeText(content.c_str(), qrcodegen::QrCode::Ecc::MEDIUM);
@@ -144,7 +144,7 @@ void QrCodeManager::generateQRImage(std::string content, int scale)
 	outFile.close();
 }
 
-void QrCodeManager::generateHighResQRCode(const std::string& text, int scale, int border)
+void QrCodeInterface::generateHighResQRCode(const std::string& text, int scale, int border)
 {
 	// Generate the QR code
 	qrcodegen::QrCode qr = qrcodegen::QrCode::encodeText(text.c_str(), qrcodegen::QrCode::Ecc::MEDIUM);
