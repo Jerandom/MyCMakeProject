@@ -1,5 +1,5 @@
 #include "Singleton/SingletonClass.h"
-#include "QRGenerator/QrCodeManager.h"
+#include "QRGenerator/QrCodeInterface.h"
 #include "CMakeLibrary.h"
 #include "SubjectClass.h"
 
@@ -18,4 +18,4 @@ T& SingletonClass<T>::instance()
  
 template class SingletonClass<SubjectClass>;
 template class SingletonClass<CMakeLibrary>;
-template class SingletonClass<QrCodeManager>;
+template class SingletonClass<QrCodeInterface>;

@@ -56,7 +56,7 @@ void QrCodeInterface::generateQRImage(std::string content, int scale)
 	qrcodegen::QrCode qr = qrcodegen::QrCode::encodeText(content.c_str(), qrcodegen::QrCode::Ecc::MEDIUM);
 
 	// Output the QR Code as a PBM (Portable Bitmap) file
-	std::ofstream outFile(OUTPUT_PATH + std::string("QrCode.bmp"), std::ios::binary);
+	std::ofstream outFile(IMAGE_PATH + std::string("QrCode.bmp"), std::ios::binary);
 
 	// BMP file header
 	outFile.put('B');
@@ -179,7 +179,7 @@ void QrCodeInterface::generateHighResQRCode(const std::string& text, int scale, 
 	}
 
 	// Save the image as a PNG file using lodepng
-	lodepng::encode(OUTPUT_PATH + std::string("QrCode.png"), image, imageSize, imageSize);
+	lodepng::encode(IMAGE_PATH + std::string("QrCode.png"), image, imageSize, imageSize);
 }
 
 

@@ -13,12 +13,18 @@ message("BUILD_TARGET: ${PLATFORM}")
 
 # Generate a definition based on Cmake File Path
 set(OUTPUT_PATH "${CMAKE_SOURCE_DIR}/MyCPlusPlusCmakeProject/bin/output/")
+set(IMAGE_PATH "${OUTPUT_PATH}/Image")
+set(LOGS_PATH "${OUTPUT_PATH}/Logs")
+
+# Configure file generation
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/inc/MainAPI/CmakeInput.h.in ${CMAKE_CURRENT_SOURCE_DIR}/inc/MainAPI/CmakeInput.h @ONLY)
 
-# Check if the directory exists
-if(NOT EXISTS ${OUTPUT_PATH})
-file(MAKE_DIRECTORY ${OUTPUT_PATH})
-endif()
+# Check if the directories exist and create them if they don't
+foreach(path ${OUTPUT_PATH} ${IMAGE_PATH} ${LOGS_PATH})
+    if(NOT EXISTS ${path})
+        file(MAKE_DIRECTORY ${path})
+    endif()
+endforeach()
 
 # add preprocessor definitions
 add_definitions(-DDLL_EXPORT)
