@@ -1,4 +1,5 @@
 #include "EventLog/EventLogger.h"
+#include <filesystem>
 
 EventLogger::EventLogger() :
 	SingletonClass(),
@@ -11,8 +12,15 @@ EventLogger::~EventLogger()
 {
 }
 
-void EventLogger::log(std::string& path, LogPriority priority, std::string& message) {
-    std::lock_guard<std::mutex> lock(logMutex); // Ensure thread safety
+void EventLogger::log(std::string& fileName, LogPriority priority, std::string& message) {
+     // thread safety
+    std::lock_guard<std::mutex> lock(logMutex);
+
+    // Check if the file or directory exists
+    std::filesystem::path logPath(LOGS_PATH + fileName);
+    if (!std::filesystem::exists(logPath.parent_path())) {
+        std::filesystem::create_directories(logPath.parent_path());
+    }
 
     std::ofstream logFile(path, std::ios_base::app);
     if (!logFile.is_open()) {
@@ -21,17 +29,28 @@ void EventLogger::log(std::string& path, LogPriority priority, std::string& mess
     }
 
     logFile << "[" << getTimestamp() << "]" << " <" << priorityToString(priority) << "> "
-            << __func__ << ": " << message << std::endl;
+     << ": " << message << std::endl;
 
-    logFile.close();  // Optional but explicit
+    logFile.close();
 }
 
-std::string EventLogger::getTimestamp() {
-    std::ostringstream oss;
-    auto t = std::time(nullptr);
-    auto tm = *std::localtime(&t);
+std::string EventLogger::getLogTimestamp() {
+    auto now = std::chrono::system_clock::now();
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
 
-    oss << std::put_time(&tm, "%d%m%Y %H:%M:%S");
+    // Format to ddmmyyyy hrs:min:sec
+    std::ostringstream oss;
+    oss << std::put_time(std::localtime(&now_c), "%d/%m/%Y %H:%M:%S");
+    return oss.str();
+}
+
+std::string EventLogger::getFileTimestamp() {
+    auto now = std::chrono::system_clock::now();
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+
+    // Format to ddmmyyyy
+    std::ostringstream oss;
+    oss << std::put_time(std::localtime(&now_c), "%d_%m_%Y");
     return oss.str();
 }
 

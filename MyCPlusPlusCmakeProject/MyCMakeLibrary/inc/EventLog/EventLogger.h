@@ -22,10 +22,11 @@ protected:
     virtual ~EventLogger();
 
 public:
-    void log(const std::string& path, LogPriority priority, const std::string& message);
+    void log(std::string& fileName, LogPriority priority, std::string& message);
 
 private:
-    std::string getTimestamp();
+    std::string getLogTimestamp();
+    std::string getFileTimestamp();
     std::string priorityToString(LogPriority priority);
 
     void run() override;
