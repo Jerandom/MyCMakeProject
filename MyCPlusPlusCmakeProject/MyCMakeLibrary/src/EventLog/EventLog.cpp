@@ -3,7 +3,6 @@
 
 EventLogger::EventLogger() :
 	SingletonClass(),
-    ThreadInterface(),
 {
 	
 }
@@ -12,7 +11,10 @@ EventLogger::~EventLogger()
 {
 }
 
-void EventLogger::log(std::string& fileName, LogPriority priority, std::string& message) {
+void EventLogger::log(std::string& fileName, 
+LogPriority priority, 
+std::string& message, 
+...) {
      // thread safety
     std::lock_guard<std::mutex> lock(logMutex);
 
@@ -28,7 +30,7 @@ void EventLogger::log(std::string& fileName, LogPriority priority, std::string& 
         return;
     }
 
-    logFile << "[" << getTimestamp() << "]" << " <" << priorityToString(priority) << "> "
+    logFile << "[" << getTimestamp() << "]" << " <" << logModeToString(priority) << "> "
      << ": " << message << std::endl;
 
     logFile.close();
@@ -54,17 +56,11 @@ std::string EventLogger::getFileTimestamp() {
     return oss.str();
 }
 
-std::string EventLogger::priorityToString(LogPriority priority) {
-    switch (priority) {
-        case SEVERE: return "SEVERE";
-        case NORMAL: return "NORMAL";
-        case LOW: return "LOW";
+std::string EventLogger::logModeToString(LogMode mode) {
+    switch (mode) {
+        case ERROR: return "ERROR";
+        case DEBUG: return "DEBUG";
+        case DEFAULT: return "DEFAULT";
         default: return "UNKNOWN";
     }
-}
-
-
-void EventLogger::run(void)
-{
-    //insert func here for thread operation
 }

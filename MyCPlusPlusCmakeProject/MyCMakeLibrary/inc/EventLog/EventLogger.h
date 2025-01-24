@@ -5,15 +5,14 @@
 #include "Singleton/SingletonClass.h"
 #include "Thread/ThreadInterface.h"
 
-enum LogPriority{
-    SERVERE,
-    NORMAL,
-    LOW
+enum LogMode{
+    ERROR,
+    DEBUG,
+    DEFAULT
 }
 
 class MAINDLL_API EventLogger : 
     public SingletonClass<EventLogger>,
-    public ThreadInterface
 {
     friend class SingletonClass<EventLogger>;
 
@@ -22,15 +21,13 @@ protected:
     virtual ~EventLogger();
 
 public:
-    void log(std::string& fileName, LogPriority priority, std::string& message);
+    void log(std::string& fileName, LogMode mode, std::string& message);
 
 private:
     std::string getLogTimestamp();
     std::string getFileTimestamp();
-    std::string priorityToString(LogPriority priority);
-
-    void run() override;
-    
+    std::string logModeToString(LogMode mode);
+    std::string formatString(std::string& message, ...);
 }
 
 #endif //_EVENT_LOGER_H
