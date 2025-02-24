@@ -1,1 +1,37 @@
-test
+public MyClass{
+    public MyClass(){
+
+    }
+
+    public void InvokeMethodFromAnotherClass<T>()
+        where T : class
+    {
+        //construct class name dynamically
+        string className = $"{typeof(T).FullName}name";
+
+        //find the .dll from assembly
+        Assembly assembly = typeof(T).Assembly;
+
+        //get Type object for the generated class
+        Type newClassNmae = assembly.GetType(className);
+        if(newClassNmae == null){
+            //class not found
+            return;
+        }
+
+        //get the static method name
+        MethodInfo getTypeMethodName = newClassNmae.GetMethod("MethodNameHere", BindingFlags.Static | BindingFlags.Public);
+        if(getTypeMethodName == null){
+            //method name not found
+            return;
+        }
+
+        //for methods with returning values
+        string methodValue = (string)getTypeMethodName.Invoke(null, null);
+        bool methodValue = (bool)getTypeMethodName.Invoke(null, null);
+        int methodValue = (int)getTypeMethodName.Invoke(null, null);
+
+        //for methods with parameters
+        getTypeMethodName.Invoke(null, new object[] {Parameter, Parameter}); 
+    }
+}
