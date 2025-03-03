@@ -34,4 +34,59 @@ public MyClass{
         //for methods with parameters
         getTypeMethodName.Invoke(null, new object[] {Parameter, Parameter}); 
     }
+
+    public bool ExecuteScript(string script, string args = null)
+    {
+        string baseDirectory = "{full path}";
+        string fullScriptPath = Path.Combine(baseDirectory, script);
+
+        // check if the script exist
+        if(!File.Exists(fullScriptPath))
+        {
+            Console.WriteLine($"{script} at {fullScriptPath} does not exist");
+            return;
+        }
+
+        ProcessStartInfo processInfo = new ProcessStartInfo
+        {
+            FileName = fullScriptPath;
+            Arguments = args;
+            useShellExecute = false;
+            RedirectStandardOutput = true;
+            RedirectStandardError = true;
+            CreateNoWindow = true;
+        }
+
+        try
+        {
+            using (Process process = Process.Start(processInfo))
+            {
+                if (process == null)
+                {
+                    Console.WriteLine("Error: Process is null");
+                    return;
+                }
+
+                // Read the output and errors
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
+
+                process.WaitForExit();
+
+                Console.WriteLine("Output: " + output);
+                if (!string.IsNullOrEmpty(error))
+                {
+                    Console.WriteLine("Error: " + error);
+                }
+                else
+                {
+                    Console.WriteLine("Batch file executed successfully.");
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine($"Exception: {e.Message}");
+        }
+    }
 }
