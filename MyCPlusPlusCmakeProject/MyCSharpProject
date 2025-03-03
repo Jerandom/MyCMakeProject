@@ -1,41 +1,59 @@
 public MyClass{
-    public MyClass(){
+    Timer timer;
+    Dictionary<string, string> monitoredProcesses
 
-    }
-
-    public void InvokeMethodFromAnotherClass<T>()
-        where T : class
+    public MyClass()
     {
-        //construct class name dynamically
-        string className = $"{typeof(T).FullName}name";
+        // important to give the correct process name
+        monitoredProcesses = new Dictionary<string, string>()
+        {
+            { "notepad", "C:/Windows/System32/notepad.exe"},
+            { "calculator", "C:/Windows/System32/calc.exe"}
+        };
 
-        //find the .dll from assembly
-        Assembly assembly = typeof(T).Assembly;
-
-        //get Type object for the generated class
-        Type newClassNmae = assembly.GetType(className);
-        if(newClassNmae == null){
-            //class not found
-            return;
-        }
-
-        //get the static method name
-        MethodInfo getTypeMethodName = newClassNmae.GetMethod("MethodNameHere", BindingFlags.Static | BindingFlags.Public);
-        if(getTypeMethodName == null){
-            //method name not found
-            return;
-        }
-
-        //for methods with returning values
-        string methodValue = (string)getTypeMethodName.Invoke(null, null);
-        bool methodValue = (bool)getTypeMethodName.Invoke(null, null);
-        int methodValue = (int)getTypeMethodName.Invoke(null, null);
-
-        //for methods with parameters
-        getTypeMethodName.Invoke(null, new object[] {Parameter, Parameter}); 
+        timer = new Timer(5000);
+        timer.Elapsed += checkProcess;
+        timer.Start();
     }
 
-    public bool ExecuteScript(string script, string args = null)
+    private void checkProcess(object sender, ElapsedEventArgs e)
+    {
+        foreach(var process in monitoredProcesses)
+        {
+            if(!IsProcessRunning(process.Key))
+            {
+                Console.WriteLine($"{process.Key} is down, restarting...");
+                RestartApplication(process.Value);
+            }
+            else
+            {
+                Console.WriteLine($"{process.Key} is running")
+            }
+        }
+    }
+
+    private void RestartApplication(string processPath)
+    {
+        try
+        {
+            Process.Start(processPath);
+            Console.WriteLine($"{processPath} restarted");
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine($"Failed to start: {e.Message}");
+        }
+    }
+
+    private bool IsProcessRunning(string processName)
+    {
+        /*  Searches through the process name to check if the process is running
+            if the name is wrong, it will always return false   */
+        bool bRet = Process.GetProcessesByName(processName).Length > 0;
+        return bRet;
+    }
+
+    private bool ExecuteScript(string script, string args = null)
     {
         string baseDirectory = "{full path}";
         string fullScriptPath = Path.Combine(baseDirectory, script);
@@ -88,5 +106,37 @@ public MyClass{
         {
             Console.WriteLine($"Exception: {e.Message}");
         }
+    }
+
+        public void InvokeMethodFromAnotherClass<T>()
+        where T : class
+    {
+        //construct class name dynamically
+        string className = $"{typeof(T).FullName}name";
+
+        //find the .dll from assembly
+        Assembly assembly = typeof(T).Assembly;
+
+        //get Type object for the generated class
+        Type newClassNmae = assembly.GetType(className);
+        if(newClassNmae == null){
+            //class not found
+            return;
+        }
+
+        //get the static method name
+        MethodInfo getTypeMethodName = newClassNmae.GetMethod("MethodNameHere", BindingFlags.Static | BindingFlags.Public);
+        if(getTypeMethodName == null){
+            //method name not found
+            return;
+        }
+
+        //for methods with returning values
+        string methodValue = (string)getTypeMethodName.Invoke(null, null);
+        bool methodValue = (bool)getTypeMethodName.Invoke(null, null);
+        int methodValue = (int)getTypeMethodName.Invoke(null, null);
+
+        //for methods with parameters
+        getTypeMethodName.Invoke(null, new object[] {Parameter, Parameter}); 
     }
 }
