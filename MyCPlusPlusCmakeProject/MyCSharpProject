@@ -182,3 +182,13 @@ public MyClass{
     </qos_profile>
 
     <qos_profile name="UDPv4Profile" base_name="DefaultProfile">
+        <participant_qos>
+            <transport_builtin>
+                <mask>UDPv4</mask>
+            </transport_builtin>
+            <resource_limits>
+                <type_code_max_serialized_length>0</type_code_max_serialized_length>
+                <type_object_max_serialized_length>0</type_object_max_serialized_length>
+                <participant_property_list_max_length>64</participant_property_list_max_length>
+                <participant_property_string_max_length>2048</participant_property_string_max_length>
+            </resource_limits>
