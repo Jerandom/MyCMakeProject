@@ -140,3 +140,45 @@ public MyClass{
         getTypeMethodName.Invoke(null, new object[] {Parameter, Parameter}); 
     }
 }
+
+/* ================= DDS CONFIG ================= */
+<qos_library name="QosLibrary">
+    <qos_profile name="DefaultProfile">
+        <participant_qos>
+            <property>
+                <value>
+                    <element>
+                        <name>dds.clock.internal_clock</name>
+                        <value>monotonic,realtime</value>
+                    </element>
+                </value>
+            </property>
+        </participant_qos>
+
+        <datawriter_qos>
+            <reliability>
+                <kind>RELIABLE_RELIABILITY_QOS</kind>
+            </reliability>
+            <history>
+                <kind>KEEP_LAST_HISTORY_QOS</kind>
+                <depth>1</depth>
+            </history>
+            <durability>
+                <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+            </durability>
+            <resource_limits>
+                <initial_samples>1</initial_samples>
+            </resource_limits>
+
+            <property>
+                <value>
+                    <element>
+                        <name>dds.data_writer.history.memory.fast_pool.pool_buffer_max_size</name>
+                        <value> 32768</value>
+                    </element>
+                </value>
+            </property>
+        </datawriter_qos>
+    </qos_profile>
+
+    <qos_profile name="UDPv4Profile" base_name="DefaultProfile">
