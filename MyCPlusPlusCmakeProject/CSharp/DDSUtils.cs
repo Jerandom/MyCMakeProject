@@ -253,7 +253,33 @@ public class DDSUtils
         {
             // check if DDS is initialised
             if((DDSState.Instance == null) ||
-               (!DDSState))
+               (!DDSState.Instance.ddsPublisher.ContainsKey(domainId) &&
+               !DDSState.Instance.ddsPublisher[domainId].ContainsKey(QosProfile)))
+            {
+                Console.Writeline($"[DDSHelper] ddsPublisher {QosProfile} not found");
+                return;
+            }
+            else
+            {
+                // create Data Writer
+                DDS.DataWriter writer = DDSState.Instance.ddsPublisher[domainId][QosProfile].create_datawriter_with_profile(
+                    DDSState.Instance.ddsTopic[domainId][typeof(T).FullName],
+                    QosLibrary,
+                    QosProfile,
+                    null,
+                    DDS.StatusMask.STATUS_MASK_NONE
+                );
+
+                if(writer == null)
+                {
+                    Console.Writeline($"[DDSHelper] Error creating data writer for {typeof(T).FullName}");
+                    return;
+                }
+
+                // assign writer object if successful
+                DDSState.Instance.ddsDataWriter[$"{typeof(T).FullName}"] = writer;
+                
+            }
         }
     }
                                      
