@@ -198,7 +198,63 @@ public class DDSUtils
         // Invoke register_type(participant, typeName)
         registerMethod.Invoke(null, new object[] {participant, typeName});
 
-        
+        // create topic with profile
+        DDSState.Instance.ddsTopic[domainId][$"{typeof(T).FullName}"] = participant.create_topic_with_profile(
+            $"{typeof(T).FullName}",
+            $"{typeof(T).FullName}",
+            QosLibrary,
+            QosProfile
+            null
+            DDS.StatusMask.STATUS_MASK_NONE
+        );
+
+        if(DDSState.Instance.ddsTopic[domainId][$"{typeof(T).FullName}"] == null)
+        {
+            Console.Writeline($"[DDSHelper] Failed to create {typeof(T).FullName} topic"); 
+            return;   
+        }
+
+        // create data readers
+        if(createDataReader)
+        {
+            //check if DDS is initialised
+            if((DDSState.Instance == null) ||
+               (!DDSState.Instance.ddsSubscriber.ContainsKey(domainId) &&
+               !DDSState.Instance.ddsSubscriber[domainId].ContainsKey(QosProfile)))
+            {
+                Console.Writeline($"[DDSHelper] ddsSubscriber {QosProfile} not found");
+                return;
+            }
+            else
+            {
+                // create Data Reader
+                DDS.DataReader reader = DDSState.Instance.ddsSubscriber[domainId][QosProfile].create_datareader_with_profile(
+                    DDSState.Instance.ddsTopic[domainId][typeof(T).FullName],
+                    QosLibrary,
+                    QosProfile,
+                    null,
+                    DDS.StatusMask.STATUS_MASK_NONE
+                );
+
+                if(reader == null)
+                {
+                    Console.Writeline($"[DDSHelper] Error creating data reader for {typeof(T).FullName}");
+                    return;
+                }
+
+                // assign reader object if successful
+                DDSState.Instance.ddsDataReader[$"{typeof(T).FullName}"] = reader;
+                Console.Writeline($"[DDSHelper] Data reader for {typeof(T).FullName} initialised");
+            }
+        }
+
+        // create data writers
+        if(createDataWriter)
+        {
+            // check if DDS is initialised
+            if((DDSState.Instance == null) ||
+               (!DDSState))
+        }
     }
                                      
 }
