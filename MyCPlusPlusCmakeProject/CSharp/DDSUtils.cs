@@ -278,8 +278,11 @@ public class DDSUtils
 
                 // assign writer object if successful
                 DDSState.Instance.ddsDataWriter[$"{typeof(T).FullName}"] = writer;
-                
+                Console.Writeline($"[DDSHelper] Data writer for {typeof(T).FullName} started");
             }
+
+            Console.Writeline($"[DDSHelper] Setup {typeof(T).FullName} complete");
+            return;
         }
     }
                                      
