@@ -117,4 +117,88 @@ public class DDSUtils
 
         return true;
     }
+
+    private bool SetupSubscriber(DDS.DomainParticipant domainParticipant, int domainId)
+    {
+        //create Subscriber & add them to the list
+        DDSState.Instance.ddsSubscriber[domainId][DDSState.Instance.ddsQosProfile] = domainParticipant.create_subscriber_with_profile(
+            DDSState.Instance.ddsQosLibrary,
+            DDSState.Instance.ddsQosProfile,
+            null,
+            DDS.StatusMask.STATUS_MASK_NONE
+        );
+
+        if(DDSState.Instance.ddsSubscriber[domainId][DDSState.Instance.ddsQosProfile] == null)
+        {
+            Console.Writeline($"[DDSHelper] Error when creating {DDSState.Instance.ddsQosProfile} Subscriber");
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool SetupPublisher(DDS.DomainParticipant domainParticipant, int domainId)
+    {
+        // create Publisher & add them to the list
+        DDSState.Instance.ddsPublisher[domainId][DDSState.Instance.ddsQosProfile] = domainParticipant.create_publisher_with_profile(
+            DDSState.Instance.ddsQosLibrary,
+            DDSState.Instance.ddsQosProfile,
+            null,
+            DDS.StatusMask.STATUS_MASK_NONE
+        );
+
+        if(DDSState.Instance.ddsPublisher[domainId][DDSState.Instance.ddsQosProfile] == null)
+        {
+            Console.Writeline($"[DDSHelper] Error when creating {DDSState.Instance.ddsQosProfile} publisher");
+            return false;
+        }
+
+        return true;
+    }
+
+    static public void CreateTopic<T>(DDS.DomainParticipant participant
+                                      int domainId,
+                                      string QosLibrary,
+                                      string QosProfile,
+                                      bool createDataReader,
+                                      bool createDataWriter)
+        where T : class
+    {
+        // construct TypeSupport class name dynamically
+        string className = $"{typeof(T).FullName}TypeSupport";
+        Assembly assembly = typeof(T).Assembly;
+
+        // get type object for the generated TypeSupport class
+        Type newClassName = assembly.GetType(className);
+        if(newClassName == null)
+        {
+            Console.Writeline($"New class {newClassName} is not found in Create Topic");
+            return;
+        }
+
+        // get the static get_type_name() method
+        MethodInfo getTypeNameMethod = newClassName.GetMethod("get_type_name", BindingFlags.Static | BindingFlags.Public);
+        if(getTypeNameMethod == null)
+        {
+            Console.Writeline($"Class {newClassName.Name} does not have a static get_type_name method");
+            return;
+        }
+
+        // Invoke get_type_name() statically to get the type name
+        string typeName = (string)getTypeNameMethod.Invoke(null, null);
+
+        // get the register_type() method
+        MethodInfo registerMethod = newClassName.GetMethod("register_type", BindingFlags.Static | BindingFlags.Public);
+        if(registerMethod == null)
+        {
+            Console.Writeline($"Class {newClassName.Name} does not have a static register_type method");
+            return;
+        }
+
+        // Invoke register_type(participant, typeName)
+        registerMethod.Invoke(null, new object[] {participant, typeName});
+
+        
+    }
+                                     
 }
