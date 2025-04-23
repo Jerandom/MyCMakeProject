@@ -169,7 +169,12 @@ public class DDSListener<T> : DDS.DataReaderListener
             }
 
             // Invoke return_loan()
-            returnLoanMethod.Invoke(T_reader, new object[])
+            returnLoanMethod.Invoke(T_reader, new object[] { data_seq, info_seq });
+        }
+        catch(DDS.Exception e)
+        {
+            Console.Writeline($"Return loan error on data for {GetType().Name}");
+            return;
         }
     }
 }
