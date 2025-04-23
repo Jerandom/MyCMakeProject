@@ -126,5 +126,50 @@ public class DDSListener<T> : DDS.DataReaderListener
             Console.Writeline($"Error on take data in {typeof(T).FullName}");
             return;
         }
+
+        // Invoke data_seq_length()
+        PropertyInfo data_seq_length = data_seq.GetType().GetProperty("length", BindingFlags.Instance | BindingFlags.Public);
+        if(data_seq_length == nul)
+        {
+            Console.Writeline($"The class {T_reader.GetType().Name} does not have a instance length() method");
+            return;
+        }
+
+        // Read data
+        for(int i = 0; i < (int)data_seq_length.GetValue(data_seq); i++)
+        {
+            if(info_seq.get_at(i).valid_data)
+            {
+                //get the get_at() method
+                MethodInfo data_seq_get_at = data_seq.GetType().GetMethod("get_at", BindingFlags.Instance | BindingFlags.Public);
+                if(data_seq_get_at == null)
+                {
+                    Console.Writeline($"The class {data_seq.GetType().Name} does not have a instance get_at() method");
+                    return;
+                }
+
+                // cast to correct object
+                object obj = data_seq_get_at.Invoke(data_seq, new object[] { i });
+                T data = (T)obj;
+
+                // invoke event
+                onDataRecieved?.Invoke(data);
+            }
+        }
+
+        // Release data
+        try
+        {
+            // get the return_loadn() method
+            MethodInfo returnLoanMethod = T_reader.GetType().GetMethod("return_loadn", BindingFlags.Instance | BindingFlags.Public);
+            if(returnLoanMethod == null)
+            {
+                Console.Writeline($"The class {T_reader.GetType().Name} does not have a instance return_loan method");
+                return;
+            }
+
+            // Invoke return_loan()
+            returnLoanMethod.Invoke(T_reader, new object[])
+        }
     }
 }
